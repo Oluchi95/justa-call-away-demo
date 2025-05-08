@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Service | Justa-Call-Away</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Justa-Call-Away</h1>
+                <p>Real people. Real skills. Need a hand?</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="providers.html">Providers</a></li>
+                    <li><a href="booking.html" class="active">Book Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="booking-section">
+            <div class="container">
+                <h2>Book a Service</h2>
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="service-type">Service Type</label>
+                        <select id="service-type" required>
+                            <option value="">Select a service</option>
+                            <option value="nanny">Nanny</option>
+                            <option value="handyman">Handyman</option>
+                            <option value="mover">Mover</option>
+                            <option value="cleaner">Cleaner</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="provider">Provider (optional)</label>
+                        <select id="provider">
+                            <option value="">Any available provider</option>
+                            <option value="sarah-johnson">Sarah Johnson (Nanny)</option>
+                            <option value="mike-rodriguez">Mike Rodriguez (Handyman)</option>
+                            <option value="lisa-chen">Lisa Chen (Cleaner)</option>
+                            <option value="james-wilson">James Wilson (Mover)</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="booking-date">Date</label>
+                            <input type="date" id="booking-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="booking-time">Time</label>
+                            <input type="time" id="booking-time" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Your address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Special Instructions</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Justa-Call-Away. Promoting SDG 8: Decent Work and Economic Growth.</p>
+        </div>
+    </footer>
+
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Booking Confirmed!</h3>
+            <div id="booking-details"></div>
+            <button class="btn btn-primary" id="booking-ok">OK</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

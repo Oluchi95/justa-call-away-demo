@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Providers | Justa-Call-Away</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Justa-Call-Away</h1>
+                <p>Real people. Real skills. Need a hand?</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="providers.html" class="active">Providers</a></li>
+                    <li><a href="booking.html">Book Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="providers-section">
+            <div class="container">
+                <h2>Available Service Providers</h2>
+                <div class="filters">
+                    <select id="service-filter">
+                        <option value="all">All Services</option>
+                        <option value="nanny">Nannies</option>
+                        <option value="handyman">Handymen</option>
+                        <option value="mover">Movers</option>
+                        <option value="cleaner">Cleaners</option>
+                    </select>
+                    <select id="location-filter">
+                        <option value="all">All Locations</option>
+                        <option value="downtown">Downtown</option>
+                        <option value="northside">Northside</option>
+                        <option value="southside">Southside</option>
+                        <option value="eastend">East End</option>
+                        <option value="westside">Westside</option>
+                    </select>
+                    <select id="rating-filter">
+                        <option value="0">Any Rating</option>
+                        <option value="4">4+ Stars</option>
+                        <option value="4.5">4.5+ Stars</option>
+                    </select>
+                </div>
+                <div id="providers-container" class="providers-container">
+                    <!-- Providers will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Justa-Call-Away. Promoting SDG 8: Decent Work and Economic Growth.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load providers when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for service parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const serviceParam = urlParams.get('service');
+            
+            if (serviceParam) {
+                document.getElementById('service-filter').value = serviceParam;
+            }
+            
+            filterProviders();
+        });
+    </script>
+</body>
+</html>
