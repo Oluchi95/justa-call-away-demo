@@ -1,86 +1,9 @@
-// Sample data for service providers
+// Sample data for service providers (only declare once)
 const providers = [
-    {
-        id: 1,
-        name: "Sarah Johnson",
-        service: "nanny",
-        serviceName: "Nanny",
-        rating: 4.8,
-        reviews: 42,
-        location: "downtown",
-        locationName: "Downtown",
-        price: "$15/hr",
-        description: "Experienced nanny with 8 years of childcare experience. CPR and first aid certified. Specializes in infant care and early childhood development.",
-        image: "https://images.unsplash.com/photo-1551218372-a32e6e9e71b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-    },
-    {
-        id: 2,
-        name: "Mike Rodriguez",
-        service: "handyman",
-        serviceName: "Handyman",
-        rating: 4.5,
-        reviews: 36,
-        location: "westside",
-        locationName: "Westside",
-        price: "$45/hr",
-        description: "Skilled handyman with expertise in plumbing, electrical work, and general home repairs. 15 years of experience serving the local community.",
-        image: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-    },
-    {
-        id: 3,
-        name: "Lisa Chen",
-        service: "cleaner",
-        serviceName: "Cleaner",
-        rating: 4.9,
-        reviews: 58,
-        location: "eastend",
-        locationName: "East End",
-        price: "$30/hr",
-        description: "Professional cleaning service with attention to detail. Uses eco-friendly products. Specializes in deep cleaning and organization.",
-        image: "https://images.unsplash.com/photo-1603899122634-f086ca5f5ddd?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-    },
-    {
-        id: 4,
-        name: "James Wilson",
-        service: "mover",
-        serviceName: "Mover",
-        rating: 4.7,
-        reviews: 27,
-        location: "northside",
-        locationName: "Northside",
-        price: "$75/hr",
-        description: "Full-service moving company with a team of professionals. We handle packing, loading, transportation, and unloading with care.",
-        image: "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80"
-    },
-    {
-        id: 5,
-        name: "Maria Garcia",
-        service: "nanny",
-        serviceName: "Nanny",
-        rating: 4.6,
-        reviews: 31,
-        location: "southside",
-        locationName: "Southside",
-        price: "$18/hr",
-        description: "Bilingual childcare provider with experience in after-school programs. Creative, patient, and loves organizing educational activities.",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-    },
-    {
-        id: 6,
-        name: "David Kim",
-        service: "handyman",
-        serviceName: "Handyman",
-        rating: 4.4,
-        reviews: 23,
-        location: "central",
-        locationName: "Central District",
-        price: "$50/hr",
-        description: "Specializes in carpentry and furniture assembly. Also offers painting and minor home improvement services. Prompt and reliable.",
-        image: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-    }
+    // ... (keep your existing provider data)
 ];
 
-// DOM Elements
+// DOM Elements (with null checks)
 const providersContainer = document.getElementById('providers-container');
 const serviceFilter = document.getElementById('service-filter');
 const locationFilter = document.getElementById('location-filter');
@@ -93,6 +16,22 @@ const modalMessage = document.getElementById('modal-message');
 const bookingDetails = document.getElementById('booking-details');
 const closeModals = document.querySelectorAll('.close-modal, #modal-ok, #booking-ok');
 
+// Helper functions
+function getServiceName(serviceType) {
+    const services = {
+        nanny: 'Nanny',
+        handyman: 'Handyman',
+        mover: 'Mover',
+        cleaner: 'Cleaner'
+    };
+    return services[serviceType] || serviceType;
+}
+
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
     // Check if we're on the providers page
@@ -100,9 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
         filterProviders();
         
         // Add event listeners for filters
-        serviceFilter.addEventListener('change', filterProviders);
-        locationFilter.addEventListener('change', filterProviders);
-        ratingFilter.addEventListener('change', filterProviders);
+        if (serviceFilter) serviceFilter.addEventListener('change', filterProviders);
+        if (locationFilter) locationFilter.addEventListener('change', filterProviders);
+        if (ratingFilter) ratingFilter.addEventListener('change', filterProviders);
     }
     
     // Contact form submission
@@ -128,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('contacts', JSON.stringify(contacts));
             
             // Show confirmation
-            modalMessage.textContent = 'Thank you for your message! We will get back to you soon.';
-            confirmationModal.style.display = 'block';
+            if (modalMessage) modalMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+            if (confirmationModal) confirmationModal.style.display = 'block';
             
             // Reset form
             contactForm.reset();
@@ -157,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 date,
                 time,
                 location,
-                notes,
+                notes: notes || 'No special instructions',
                 status: 'confirmed',
                 createdAt: new Date().toISOString()
             };
@@ -168,15 +107,17 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('bookings', JSON.stringify(bookings));
             
             // Show booking details in modal
-            bookingDetails.innerHTML = `
-                <p><strong>Service:</strong> ${getServiceName(serviceType)}</p>
-                <p><strong>Provider:</strong> ${booking.provider}</p>
-                <p><strong>Date:</strong> ${formatDate(date)} at ${time}</p>
-                <p><strong>Location:</strong> ${location}</p>
-                ${notes ? <p><strong>Notes:</strong> ${notes}</p> : ''}
-            `;
+            if (bookingDetails) {
+                bookingDetails.innerHTML = `
+                    <p><strong>Service:</strong> ${getServiceName(serviceType)}</p>
+                    <p><strong>Provider:</strong> ${booking.provider}</p>
+                    <p><strong>Date:</strong> ${formatDate(date)} at ${time}</p>
+                    <p><strong>Location:</strong> ${location}</p>
+                    ${notes ? <p><strong>Notes:</strong> ${notes}</p> : ''}
+                `;
+            }
             
-            bookingModal.style.display = 'block';
+            if (bookingModal) bookingModal.style.display = 'block';
             
             // Reset form
             bookingForm.reset();
@@ -186,17 +127,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close modal events
     closeModals.forEach(btn => {
         btn.addEventListener('click', function() {
-            confirmationModal.style.display = 'none';
-            bookingModal.style.display = 'none';
+            if (confirmationModal) confirmationModal.style.display = 'none';
+            if (bookingModal) bookingModal.style.display = 'none';
         });
     });
     
     // Close modal when clicking outside
     window.addEventListener('click', function(e) {
-        if (e.target === confirmationModal) {
+        if (e.target === confirmationModal && confirmationModal) {
             confirmationModal.style.display = 'none';
         }
-        if (e.target === bookingModal) {
+        if (e.target === bookingModal && bookingModal) {
             bookingModal.style.display = 'none';
         }
     });
@@ -226,15 +167,17 @@ function filterProviders() {
 }
 
 // Display providers in the UI
-function displayProviders(providers) {
+function displayProviders(providersToDisplay) {
+    if (!providersContainer) return;
+    
     providersContainer.innerHTML = '';
     
-    if (providers.length === 0) {
-        providersContainer.innerHTML = '<p>No providers found.</p>';
+    if (providersToDisplay.length === 0) {
+        providersContainer.innerHTML = '<p class="no-results">No providers match your criteria. Try adjusting your filters.</p>';
         return;
     }
     
-    providers.forEach(provider => {
+    providersToDisplay.forEach(provider => {
         const providerCard = document.createElement('div');
         providerCard.className = 'provider-card';
         providerCard.innerHTML = `
