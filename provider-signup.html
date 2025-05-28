@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join as a Provider | Justa-Call-Away</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Justa-Call-Away</h1>
+                <p>Real people. Real skills. Need a hand?</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="providers.html">Providers</a></li>
+                    <li><a href="booking.html">Book Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="signup-section">
+            <div class="container">
+                <h2>Join Our Team of Professionals</h2>
+                <form id="provider-signup-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service You Offer</label>
+                            <select id="service" required>
+                                <option value="">Select your service</option>
+                                <option value="nanny">Nanny</option>
+                                <option value="handyman">Handyman</option>
+                                <option value="mover">Mover</option>
+                                <option value="cleaner">Cleaner</option>
+                                <option value="gardener">Gardener</option>
+                                <option value="electrician">Electrician</option>
+                                <option value="plumber">Plumber</option>
+                                <option value="painter">Painter</option>
+                                <option value="carpenter">Carpenter</option>
+                                <option value="mechanic">Mechanic</option>
+                                <option value="hair-stylist">Hair Stylist</option>
+                                <option value="makeup-artist">Makeup Artist</option>
+                                <option value="tailor">Tailor</option>
+                                <option value="fitness-trainer">Fitness Trainer</option>
+                                <option value="web-developer">Web Developer</option>
+                                <option value="graphic-designer">Graphic Designer</option>
+                                <option value="interior-designer">Interior Designer</option>
+                                <option value="caterer">Caterer</option>
+                                <option value="photographer">Photographer</option>
+                                <option value="cleaner">Home Cleaning</option>
+                                <option value="driver">Driver</option>
+                                <option value="tailor">Fashion Designer</option>
+                                <option value="barber">Barber</option>
+                                <option value="lesson-teacher">Lesson Teacher</option>
+                                <option value="laundry">Laundry / Dry Cleaning</option>
+                                <option value="ac-repair">AC Repair</option>
+                                <option value="car-wash">Car Wash</option>
+                                <option value="pest-control">Pest Control</option>
+                                <option value="technician">Phone/Computer Technician</option>
+                                <option value="bouncer">Event Bouncer</option>
+                                <option value="security">Security Personnel</option>
+                                <option value="dj">DJ</option>
+                                <option value="event-planner">Event Planner</option> 
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">Years of Experience</label>
+                        <input type="number" id="experience" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Your Location</label>
+                        <select id="location" required>
+                            <option value="">Select your location</option>
+                            <!-- Nigerian states will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Brief Bio/Description</label>
+                        <textarea id="bio" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hourly-rate">Hourly Rate (₦)</label>
+                        <input type="number" id="hourly-rate" min="500" step="500" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="availability">Availability</label>
+                        <div class="availability-options">
+                            <label><input type="checkbox" name="availability" value="weekdays"> Weekdays</label>
+                            <label><input type="checkbox" name="availability" value="weekends"> Weekends</label>
+                            <label><input type="checkbox" name="availability" value="mornings"> Mornings</label>
+                            <label><input type="checkbox" name="availability" value="evenings"> Evenings</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-photo">Profile Photo</label>
+                        <input type="file" id="profile-photo" accept="image/*">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="certifications">Certifications (Upload PDF)</label>
+                        <input type="file" id="certifications" accept=".pdf,.doc,.docx">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Complete Registration</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Justa-Call-Away. Promoting SDG 8: Decent Work and Economic Growth.</p>
+        </div>
+    </footer>
+
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Application Submitted!</h3>
+            <p id="modal-message">Thank you for applying to join Justa-Call-Away. We'll review your application and get back to you within 3 business days.</p>
+            <button class="btn btn-primary" id="modal-ok">OK</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

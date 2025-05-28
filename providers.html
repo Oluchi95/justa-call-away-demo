@@ -32,8 +32,8 @@
                             <option value="all">All Services</option>
                             <option value="nanny">Nanny</option>
                             <option value="handyman">Handyman</option>
-                            <option value="mover">Movers</option>
-                            <option value="cleaner">Cleaners</option>
+                            <option value="mover">Mover</option>
+                            <option value="cleaner">Cleaner</option>
                             <option value="gardener">Gardener</option>
                             <option value="electrician">Electrician</option>
                             <option value="plumber">Plumber</option>
@@ -42,9 +42,13 @@
                             <option value="mechanic">Mechanic</option>
                             <option value="hair-stylist">Hair Stylist</option>
                             <option value="makeup-artist">Makeup Artist</option>
-                            <option value="tailor">Tailors</option>
-                            <option value="caterer">Caterers</option>
-                            <option value="photographer">Photographers</option>
+                            <option value="tailor">Tailor</option>
+                            <option value="fitness-trainer">Fitness Trainer</option>
+                            <option value="web-developer">Web Developer</option>
+                            <option value="graphic-designer">Graphic Designer</option>
+                            <option value="interior-designer">Interior Designer</option>
+                            <option value="caterer">Caterer</option>
+                            <option value="photographer">Photographer</option>
                             <option value="cleaner">Home Cleaning</option>
                             <option value="driver">Driver</option>
                             <option value="tailor">Fashion Designer</option>
@@ -88,34 +92,5 @@
         </footer>
 
         <script src="script.js"></script>
-        <script>
-            // Populate Nigerian states in location filter
-            const nigerianStates = [
-                "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue",
-                "Borno", "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu",
-                "FCT (Abuja)", "Gombe", "Imo", "Jigawa", "Kaduna", "Kano", "Katsina",
-                "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", "Ondo",
-                "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
-            ];
-
-            const locationFilter = document.getElementById('location-filter');
-
-            nigerianStates.forEach(state => {
-                const option = document.createElement('option');
-                option.value = state;
-                option.textContent = state;
-                locationFilter.appendChild(option);
-            });
-
-            // Load providers when page loads
-            document.addEventListener('DOMContentLoaded', function() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const serviceParam = urlParams.get('service');
-                if (serviceParam) {
-                    document.getElementById('service-filter').value = serviceParam;
-                }
-                filterProviders();
-            });
-        </script>
     </body>
 </html>
