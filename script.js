@@ -31,32 +31,33 @@ function getServiceName(serviceType) {
         nanny: 'Nanny',
         handyman: 'Handyman',
         mover: 'Mover',
-        cleaner: 'Cleaner',
-        hairStylist: 'Hair Stylist',
+        gardener: 'Gardener',
         electrician: 'Electrician',
-        makeupArtist: 'Makeup Artist',
         plumber: 'Plumber',
+        painter: 'Painter',
+        carpenter: 'Carpenter',
+        mechanic: 'Mechanic',
+        hairStylist: 'Hair Stylist',
+        makeupArtist: 'Makeup Artist',
+        tailor: 'Tailor',
+        fitnessTrainer: 'Fitness Trainer',
+        webDeveloper: 'Web Developer',
+        graphicDesigner: 'Graphic Designer',
+        interiorDesigner: 'Interior Designer',
         caterer: 'Caterer',
         photographer: 'Photographer',
-        fitnessTrainer: 'Fitness Trainer',
-        graphicDesigner: 'Graphic Designer',
-        webDeveloper: 'Web Developer',
-        interiorDesigner: 'Interior Designer',
-        carpenter: 'Carpenter',
-        tailor: 'Tailor',
-        gardener: 'Gardener',
-        painter: 'Painter',
-        mechanic: 'Mechanic',
+        homeCleaner: 'Home Cleaner',       
         driver: 'Driver',
+        fashionDesigner: 'Fashion Designer',
         barber: 'Barber',
         lessonTeacher: 'Lesson Teacher',
         laundry: 'Laundry Service',
         acRepair: 'AC Repair',
         carWash: 'Car Wash',
         pestControl: 'Pest Control',
-        technician: 'Technician',
-        bouncer: 'Bouncer',
-        security: 'Security',
+        technician: 'Phone/Computer Technician',
+        bouncer: 'Event Bouncer',
+        security: 'Security Personnel',
         dj: 'DJ',
         eventPlanner: 'Event Planner'
     };
@@ -765,52 +766,64 @@ providers.push({
 
 
 // Carousel functionality
-if (document.querySelector('.services-carousel')) {
-    const carousel = document.querySelector('.services-carousel');
+function initCarousel() {
+    const carousel = document.querySelector('.services-grid');
     const dots = document.querySelectorAll('.carousel-dot');
-    const prevBtn = document.querySelector('.carousel-arrow.prev');
-    const nextBtn = document.querySelector('.carousel-arrow.next');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    
+    if (!carousel) return;
     
     let currentIndex = 0;
+    const cards = document.querySelectorAll('.service-card');
+    const cardCount = cards.length;
     
-    // Update dots
-    function updateDots() {
+    // Update dots and scroll position
+    function updateCarousel() {
+        // Update dots
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === currentIndex);
         });
-    }
-    
-    // Scroll to card
-    function scrollToCard(index) {
-        const cardWidth = document.querySelector('.service-card').offsetWidth;
-        carousel.scrollTo({
-            left: index * (cardWidth + 15),
-            behavior: 'smooth'
+        
+        // Scroll to current card
+        cards[currentIndex].scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
         });
-        currentIndex = index;
-        updateDots();
     }
     
-    // Dot click events
+    // Navigation functions
+    function goToIndex(index) {
+        currentIndex = (index + cardCount) % cardCount;
+        updateCarousel();
+    }
+    
+    function next() {
+        goToIndex(currentIndex + 1);
+    }
+    
+    function prev() {
+        goToIndex(currentIndex - 1);
+    }
+    
+    // Event listeners
     dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => scrollToCard(index));
+        dot.addEventListener('click', () => goToIndex(index));
     });
     
-    // Arrow buttons
-    if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', () => {
-            scrollToCard(Math.max(0, currentIndex - 1));
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            scrollToCard(Math.min(dots.length - 1, currentIndex + 1));
-        });
-    }
+    if (nextBtn) nextBtn.addEventListener('click', next);
+    if (prevBtn) prevBtn.addEventListener('click', prev);
     
-    // Auto-update dots on scroll
-    carousel.addEventListener('scroll', () => {
-        const cardWidth = document.querySelector('.service-card').offsetWidth;
-        currentIndex = Math.round(carousel.scrollLeft / (cardWidth + 15));
-        updateDots();
+    // Auto-advance (optional)
+    let autoScroll = setInterval(next, 5000);
+    
+    // Pause on hover
+    carousel.addEventListener('mouseenter', () => clearInterval(autoScroll));
+    carousel.addEventListener('mouseleave', () => {
+        autoScroll = setInterval(next, 5000);
     });
 }
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initCarousel);

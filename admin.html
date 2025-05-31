@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Justa-Call-Away</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <aside class="admin-sidebar">
+            <div class="logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#providers"><i class="fas fa-users"></i> Service Providers</a></li>
+                    <li><a href="#bookings"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="admin-profile">
+                    <img src="images/admin-avatar.jpg" alt="Admin">
+                    <span>Admin User</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Sections -->
+            <section id="dashboard" class="admin-section">
+                <h2>Provider Approvals</h2>
+                <div class="stats-cards">
+                    <div class="stat-card pending">
+                        <h3>Pending</h3>
+                        <p id="pending-count">0</p>
+                    </div>
+                    <div class="stat-card approved">
+                        <h3>Approved</h3>
+                        <p id="approved-count">0</p>
+                    </div>
+                    <div class="stat-card rejected">
+                        <h3>Rejected</h3>
+                        <p id="rejected-count">0</p>
+                    </div>
+                </div>
+
+                <div class="approval-queue">
+                    <h3><i class="fas fa-user-clock"></i> Pending Approvals</h3>
+                    <div class="filter-controls">
+                        <select id="approval-filter">
+                            <option value="all">All Services</option>
+                            <option value="nanny">Nannies</option>
+                            <option value="electrician">Electricians</option>
+                            <!-- Add other services -->
+                        </select>
+                        <button id="refresh-btn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                    <div id="pending-providers-list" class="providers-list">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Provider Management Section -->
+            <section id="providers" class="admin-section hidden">
+                <!-- Content will be loaded here -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Approval Modal -->
+    <div id="approval-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Review Provider</h3>
+            <div id="provider-details"></div>
+            <div class="modal-actions">
+                <button id="approve-btn" class="btn-success"><i class="fas fa-check"></i> Approve</button>
+                <button id="reject-btn" class="btn-danger"><i class="fas fa-times"></i> Request Changes</button>
+                <button id="hold-btn" class="btn-warning"><i class="fas fa-pause"></i> Put On Hold</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
